@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebGL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      html, body, #map {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="js/leaflet/leaflet.css" />
+    <script src="js/leaflet/leaflet.js"></script>
+
+    <!-- Mapbox GL -->
+    <link href="css/mapbox-gl.css" rel='stylesheet' />
+    <script src="js/mapbox-gl.js"></script>
+
+    <!-- Geocoder -->
+    <link rel="stylesheet" href="css/Control.Geocoder.css" />
+    <script src="js/Control.Geocoder.js"></script>
+
+</head>
+
+<body>
+<div id="map" style="width: 600px; height: 400px;"></div>
+
+<script src="js/leaflet/leaflet-mapbox-gl.js"></script>
+<script>
+
+
+//1- define used geocode service
+var map = L.map('map');
+var geocoder = L.Control.Geocoder.nominatim({serviceUrl:"http://localhost:8080/"});
+var control = L.Control.geocoder({
+		geocoder: geocoder
+	}).addTo(map);
+var marker;
+
+
+//2-define tile server used
+var gl = L.mapboxGL({
+    accessToken: 'no-token',
+    style: 'http://localhost:9080/styles/klokantech-basic/style.json'
+}).addTo(map);
+
+//3-define address to show
+//var address = "147 rue Omer Pierard, 5030 Ernage";
+var address = "79 rue des francs, 1040 Etterbeek";
+//var address = "1 rue buisson saint guibert, 5030 Gembloux";
+//var address = "4a rue Toune, 1461 Haut-Ittre";
+
+//4-display map on the right place
+geocoder.geocode(address, function(results) {
+	var r = results[0];
+	if (r) {
+		map.setView(r.center, 16);
+		if (marker) {
+			marker.
+				setLatLng(r.center).
+				setPopupContent(r.html || r.name).
+				openPopup();
+		} else {
+			
+			marker = L.marker(r.center).bindPopup(address).addTo(map).openPopup();
+			
+		}
+		
+	}
+})
+
+
+</script>
+</body>
+</html>
+
