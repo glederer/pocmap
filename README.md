@@ -1,13 +1,14 @@
 # pocmap
-A proof of concept of self hosted map to embed on your website  goal was to :
-1) have a mapserver serving tiles (TileServer GL)
-2) have a geolocation service (Nominatim)
-3) have asimple html page displaying map, with js frontend framewokr for user interacting (Leaflet and needed plugins)
+A proof of concept of self hosted map to embed on your websit, using OPenstreetmap data and tools.  
+Goal was to :
+1) have a mapserver serving tiles (TileServer GL) running locally
+2) have a geolocation service (Nominatim) running locally
+3) have a simple html page displaying map, with js frontend framework for user interacting (Leaflet and needed plugins : https://leafletjs.com)
 
 ## pre-requisite
 
-Have docker installed.
-Clone this repo.
+Have docker installed : https://www.docker.com
+Clone this repo
 
 ## 1- Use tileserver-gl with Docker
 
@@ -19,7 +20,7 @@ Download yur desired mbtiles file, place it this root folder, run their docker i
 docker run --rm -it -v $(pwd):/data -p 9080:80 klokantech/tileserver-gl
 ```
 
-localhost:9080 should show the tool with your map. (use 9080, not 8080)
+http://localhost:9080 should show the tool with your map. (use 9080, not 8080)
 
 ## 2- Use Nominatim, clone it then Docker build it
 
@@ -31,7 +32,7 @@ Clone their repository in this root folder, modify their docker file to reflect 
 docker run --restart=always -d -p 8080:8080 --name nominatim mediagis/nominatim:latest
 ```
 
-localhost:8080 should show the nominatim application the tool with your map. (use 9080, not 8080)
+http://localhost:8080 should show the nominatim application service, this allow you to query addresses to get corresponding coordinates. (use 9080, not 8080)
 
 ## 3- Open the map in browser
 
