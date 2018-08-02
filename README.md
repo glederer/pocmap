@@ -1,5 +1,5 @@
 # pocmap
-A proof of concept of self hosted map to embed on your websit, using OPenstreetmap data and tools.  
+A proof of concept of self hosted map to embed on your websit, using Openstreetmap data and tools.  
 Goal was to :
 1) have a mapserver serving tiles (TileServer GL) running locally
 2) have a geolocation service (Nominatim) running locally
@@ -14,7 +14,7 @@ Clone this repo
 
 View readme here : https://github.com/klokantech/tileserver-gl 
 
-Download yur desired mbtiles file, place it this root folder, run their docker image : 
+Download your desired mbtiles file, place it this root folder, run their docker image : 
 
 ```bash
 docker run --rm -it -v $(pwd):/data -p 9080:80 klokantech/tileserver-gl
@@ -22,7 +22,7 @@ docker run --rm -it -v $(pwd):/data -p 9080:80 klokantech/tileserver-gl
 
 http://localhost:9080 should show the tool with your map. (use 9080, not 8080)
 
-## 2- Use Nominatim, clone it then Docker build it
+## 2- Use Nominatim, clone it, then Docker build it
 
 View readme here : https://github.com/mediagis/nominatim-docker 
 
